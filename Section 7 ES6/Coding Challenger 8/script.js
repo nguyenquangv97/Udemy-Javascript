@@ -13,7 +13,7 @@ class Park extends Element {
     }
 
     treeDensity(){
-        console.log(`${this.name} has a tree density of ${this.numTrees / this.area} trees per square km`);
+        console.log(`${this.name} has a tree density of ${this.numTrees / this.area} trees per square km.`);
     }
 }
 
@@ -22,17 +22,16 @@ class Street extends Element {
         super(name, buildYear);
         this.length = length;
         this.size = size;
-
     }
 
-    classifyStree(){
+    classifyStreet(){
         const classification = new Map();
         classification.set(1, 'tiny');
         classification.set(2, 'small');
         classification.set(3, 'normal');
         classification.set(4, 'big');
         classification.set(5, 'huge');
-        console.log(`${this.name}, build in ${this.buildYear}, is a ${classification.get(this.size)}`);
+        console.log(`${this.name}, build in ${this.buildYear}, is a ${classification.get(this.size)} street.`);
     }
 }
 
@@ -52,14 +51,26 @@ const allStreets = [
 function reportParks(p) {
     console.log(`----- PARKS REPORT -----`);
     p.forEach(el => el.treeDensity());
+
+    const ages = p.map(el => new Date().getFullYear() - el.buildYear);
+    const[totalAge, avgAge] = calc(ages);
+    console.log(`Our ${p.length} parks have an average of ${avgAge} years.`);
+
+    const i = p.map(el => el.numTrees).findIndex(el => el >= 1000);
+    console.log(`${p[i].name} has more than 1000 trees.`);
 }
 
 function reportStreets(s) {
+    console.log(`----- STREETS REPORT -----`);
+    const [totalLength, avgLength] = calc(s.map(el => el.length));
+    console.log(`Our ${s.length} streets have a total length of ${totalLength.toFixed(2)} km, with an average of ${avgLength.toFixed(2)} km.`);
 
+    s.forEach(el => el.classifyStreet());
 }
 
 function calc(arr){
     const sum = arr.reduce((previousValue, currentValue, currentIndex) => previousValue + currentValue, 0);
+    return [sum, sum / arr.length];
 }
 
 reportParks(allParks);
