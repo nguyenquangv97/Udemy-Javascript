@@ -3561,7 +3561,7 @@ eval("/**\n * Copyright (c) 2014-present, Facebook, Inc.\n *\n * This source cod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _models_Search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./models/Search */ \"./src/js/models/Search.js\");\n/* harmony import */ var _views_searchView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/searchView */ \"./src/js/views/searchView.js\");\n\n\nconsole.log(\"Using imported function! \".concat(Object(_views_searchView__WEBPACK_IMPORTED_MODULE_1__[\"add\"])(ID, 2), \" and \").concat(Object(_views_searchView__WEBPACK_IMPORTED_MODULE_1__[\"multiply\"])(3, 5), \". \").concat(_models_Search__WEBPACK_IMPORTED_MODULE_0__[\"default\"]));\n\n//# sourceURL=webpack:///./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _models_Search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./models/Search */ \"./src/js/models/Search.js\");\n/* harmony import */ var _views_searchView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/searchView */ \"./src/js/views/searchView.js\");\n // import {add as a, multiply as m, ID } from './views/searchView';\n\n\nconsole.log(\"Using imported function! \".concat(_views_searchView__WEBPACK_IMPORTED_MODULE_1__[\"add\"](_views_searchView__WEBPACK_IMPORTED_MODULE_1__[\"ID\"], 2), \" and \").concat(_views_searchView__WEBPACK_IMPORTED_MODULE_1__[\"multiply\"](3, 5), \". \").concat(_models_Search__WEBPACK_IMPORTED_MODULE_0__[\"default\"]));\n\n//# sourceURL=webpack:///./src/js/index.js?");
 
 /***/ }),
 
