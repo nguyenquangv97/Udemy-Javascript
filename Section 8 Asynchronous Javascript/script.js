@@ -33,29 +33,29 @@
 // getRecipe();
 
 //------------------------------ Promises ------------------------------//
-const getIDs = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve([523, 883, 432, 974]);
-    }, 1500);
-});
+// const getIDs = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve([523, 883, 432, 974]);
+//     }, 1500);
+// });
 
-const getRecipe = recID => {
-    return new Promise((resolve, reject) => {
-        setTimeout(ID => {
-            const recipe = {title: 'Fresh tomato pasta', publisher: 'Jonas'};
-            resolve(`${ID}: ${recipe.title}`);
-        }, 1500, recID);
-    });
-};
+// const getRecipe = recID => {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(ID => {
+//             const recipe = {title: 'Fresh tomato pasta', publisher: 'Jonas'};
+//             resolve(`${ID}: ${recipe.title}`);
+//         }, 1500, recID);
+//     });
+// };
 
-const getRelated = publisher => {
-    return new Promise((resolve, reject) => {
-        const recipe = {title: 'Italian Pizza', publisher: 'Jonas'};
-        setTimeout((pub) => {
-            resolve(`${pub}: ${recipe.title}`);
-        }, 1500, publisher);
-    });
-};
+// const getRelated = publisher => {
+//     return new Promise((resolve, reject) => {
+//         const recipe = {title: 'Italian Pizza', publisher: 'Jonas'};
+//         setTimeout((pub) => {
+//             resolve(`${pub}: ${recipe.title}`);
+//         }, 1500, publisher);
+//     });
+// };
 
 
 // getIDs.then(IDs => {
@@ -73,19 +73,56 @@ const getRelated = publisher => {
 //     console.log(error);
 // });
 
-async function getRecipesAW(){
-    const IDs = await getIDs;
-    console.log(IDs);
-    const recipe = await getRecipe(IDs[2]);
-    console.log(recipe);
-    const related = await getRelated('Quang Nguyen');
-    console.log(related);
+// async function getRecipesAW(){
+//     const IDs = await getIDs;
+//     console.log(IDs);
+//     const recipe = await getRecipe(IDs[2]);
+//     console.log(recipe);
+//     const related = await getRelated('Quang Nguyen');
+//     console.log(related);
 
-    return recipe;
-    // the promise automatically resolve the recipe as the returned value
+//     return recipe;
+//     // the promise automatically resolve the recipe as the returned value
+// }
+
+// getRecipesAW().then(result => {
+//     console.log(`${result} is great!`);
+// });
+
+const cors_api_host = 'cors-anywhere.herokuapp.com';
+const cors_api_url = `https://${cors_api_host}/`;
+
+function getWeather(woeid){
+    fetch(`${cors_api_url}https://www.metaweather.com/api/location/${woeid}/`)
+    .then(result => {
+        return result.json();
+    })
+    .then(data => {
+        //console.log(data);
+        const today = data.consolidated_weather[0];
+        console.log(`Temperatures today in ${data.title} stay between ${today.min_temp} and ${today.max_temp}.`);
+    })
+    .catch(error => console.log(error));
+}
+getWeather(2487956);
+getWeather(44418);
+
+async function getWeatherAW(woeid) {
+    try {
+        const result = await fetch(`${cors_api_url}https://www.metaweather.com/api/location/${woeid}/`);
+        const data = await result.json();
+        //console.log(data);
+        const tomorrow = data.consolidated_weather[1];
+        console.log(`Temperatures tomorrow in ${data.title} stay between ${tomorrow.min_temp} and ${tomorrow.max_temp}.`);
+        return data;
+    } catch(error) {
+        console.log(error);
+    }
 }
 
-getRecipesAW().then(result => {
-    console.log(`${result} is great!`);
+getWeatherAW(2487956);
+let dataLondon;
+getWeatherAW(44418).then(data => {
+    dataLondon = data;
+    console.log(dataLondon);
 });
-
